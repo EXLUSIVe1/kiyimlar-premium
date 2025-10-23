@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahsulotlar | Exclusive Premium House</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+    header {
+      background: #111;
+      color: #fff;
+      padding: 15px 0;
+    }
+    .container {
+      width: 90%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .logo span {
+      color: gold;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    nav ul li a.active,
+    nav ul li a:hover {
+      background: gold;
+      color: #111;
+    }
+    .lang-switcher button {
+      margin-left: 5px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .lang-switcher button:hover {
+      background: gold;
+      color: #111;
+    }
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 30px;
+      color: #111;
+    }
+    .products-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 0 30px 50px 30px;
+    }
+    @media (max-width: 768px) {
+      .products-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .product-card h3 {
+      color: #111;
+      margin: 10px 0 5px;
+    }
+    .product-card p {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .product-card strong {
+      color: #000;
+    }
+    .add-to-cart {
+      background: gold;
+      color: #111;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .add-to-cart:hover {
+      background: #ffcc00;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="logo">Exclusive <span>Premium House</span></div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Bosh sahifa</a></li>
+          <li><a href="products.html" class="active">Mahsulotlar</a></li>
+          <li><a href="about.html">Biz haqimizda</a></li>
+          <li><a href="contact.html">Aloqa</a></li>
+          <li><a href="car.html">Savatcha</a></li>
+          <li><a href="admin.html">Admin</a></li>
+        </ul>
+      </nav>
+      <div class="lang-switcher">
+        <button>UZ</button>
+        <button>RU</button>
+        <button>EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PRODUCTS SECTION -->
+  <section class="features" id="products">
+    <h2>Bizning Mahsulotlar</h2>
+    <div class="products-container" id="productList">
+      <p style="text-align:center; color:#555;">Mahsulotlar yuklanmoqda...</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan.</p>
+  </footer>
+
+  <!-- FIREBASE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA8pO6GBi5MeeycsKIgZUOYvAUM639kKvI",
+      authDomain: "premiumuz-9f03d.firebaseapp.com",
+      databaseURL: "https://premiumuz-9f03d-default-rtdb.firebaseio.com",
+      projectId: "premiumuz-9f03d",
+      storageBucket: "premiumuz-9f03d.firebasestorage.app",
+      messagingSenderId: "874271730419",
+      appId: "1:874271730419:web:74f35f5465a8ff4771a586",
+      measurementId: "G-T0DE6KSDGH"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const productList = document.getElementById("productList");
+
+    const productsRef = ref(db, "products");
+    onValue(productsRef, (snapshot) => {
+      productList.innerHTML = "";
+      if (snapshot.exists()) {
+        snapshot.forEach((child) => {
+          const p = child.val();
+          const card = document.createElement("div");
+          card.classList.add("product-card");
+          card.innerHTML = `
+            <img src="${p.image}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <p>${p.desc || "Tavsif mavjud emas"}</p>
+            <p><strong>${Number(p.price).toLocaleString()} so‘m</strong></p>
+            <button class="add-to-cart" data-name="${p.name}" data-price="${p.price}">Savatga qo‘shish</button>
+          `;
+          productList.appendChild(card);
+        });
+      } else {
+        productList.innerHTML = "<p style='text-align:center;'>Hozircha mahsulotlar yo‘q.</p>";
+      }
+    });
+
+    // Savatchaga qo‘shish
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("add-to-cart")) {
+        const name = e.target.dataset.name;
+        const price = e.target.dataset.price;
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push({ name, price });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`✅ "${name}" savatga qo‘shildi!`);
+      }
+    });
+  </script>
+
+</body>
+</html>

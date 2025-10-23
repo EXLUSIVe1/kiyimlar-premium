@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exclusive Premium House</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="image/premiumm.jpg" />
+
+  <style>
+    .lang-switcher button {
+      margin-left: 5px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .lang-switcher button.active {
+      background-color: gold;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="logo">Exclusive <span>Premium House</span></div>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="nav-link" data-key="home">Bosh sahifa</a></li>
+          <li><a href="products.html" class="nav-link" data-key="products">Mahsulotlar</a></li>
+          <li><a href="about.html" class="nav-link" data-key="about">Biz haqimizda</a></li>
+          <li><a href="contact.html" class="nav-link" data-key="contact">Aloqa</a></li>
+          <li><a href="admin.html" class="nav-link" data-key="admin">Admin</a></li>
+        </ul>
+      </nav>
+      <div class="lang-switcher">
+        <button data-lang="uz">UZ</button>
+        <button data-lang="ru">RU</button>
+        <button data-lang="en">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2 data-key="heroTitle">Erkaklar uchun premium kiyimlar</h2>
+      <p data-key="heroDesc">Eng yuqori sifat, nafis dizayn va mukammal uslub.</p>
+      <a href="products.html" class="btn" data-key="heroBtn">Mahsulotlarni ko‘rish</a>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <div class="feature">
+        <h3 data-key="feature1Title">Sifatli Materiallar</h3>
+        <p data-key="feature1Desc">Bizning kiyimlar faqat premium matolardan tayyorlanadi.</p>
+      </div>
+      <div class="feature">
+        <h3 data-key="feature2Title">Yevropa Dizayni</h3>
+        <p data-key="feature2Desc">Har bir detal — zamonaviy erkaklar uslubiga mos.</p>
+      </div>
+      <div class="feature">
+        <h3 data-key="feature3Title">Tez Yetkazib Berish</h3>
+        <p data-key="feature3Desc">Buyurtmalaringiz 1-2 kun ichida yetkaziladi.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p data-key="footer">© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan.</p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Til matnlari
+    const translations = {
+      uz: {
+        home: "Bosh sahifa",
+        products: "Mahsulotlar",
+        about: "Biz haqimizda",
+        contact: "Aloqa",
+        admin: "Admin",
+        heroTitle: "Erkaklar uchun premium kiyimlar",
+        heroDesc: "Eng yuqori sifat, nafis dizayn va mukammal uslub.",
+        heroBtn: "Mahsulotlarni ko‘rish",
+        feature1Title: "Sifatli Materiallar",
+        feature1Desc: "Bizning kiyimlar faqat premium matolardan tayyorlanadi.",
+        feature2Title: "Yevropa Dizayni",
+        feature2Desc: "Har bir detal — zamonaviy erkaklar uslubiga mos.",
+        feature3Title: "Tez Yetkazib Berish",
+        feature3Desc: "Buyurtmalaringiz 1-2 kun ichida yetkaziladi.",
+        footer: "© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan."
+      },
+      ru: {
+        home: "Главная",
+        products: "Продукты",
+        about: "О нас",
+        contact: "Контакты",
+        admin: "Админ",
+        heroTitle: "Премиальная одежда для мужчин",
+        heroDesc: "Высокое качество, изысканный дизайн и идеальный стиль.",
+        heroBtn: "Посмотреть продукты",
+        feature1Title: "Качественные материалы",
+        feature1Desc: "Наша одежда изготовлена только из премиальных тканей.",
+        feature2Title: "Европейский дизайн",
+        feature2Desc: "Каждая деталь соответствует современному мужскому стилю.",
+        feature3Title: "Быстрая доставка",
+        feature3Desc: "Ваши заказы доставляются за 1-2 дня.",
+        footer: "© 2025 Exclusive Premium House | Все права защищены."
+      },
+      en: {
+        home: "Home",
+        products: "Products",
+        about: "About Us",
+        contact: "Contact",
+        admin: "Admin",
+        heroTitle: "Premium clothing for men",
+        heroDesc: "Highest quality, elegant design, and perfect style.",
+        heroBtn: "View Products",
+        feature1Title: "Quality Materials",
+        feature1Desc: "Our clothes are made only from premium fabrics.",
+        feature2Title: "European Design",
+        feature2Desc: "Every detail fits modern men's style.",
+        feature3Title: "Fast Delivery",
+        feature3Desc: "Your orders are delivered within 1-2 days.",
+        footer: "© 2025 Exclusive Premium House | All rights reserved."
+      }
+    };
+
+    // Tilni qo‘llash
+    function applyLanguage(lang) {
+      const elements = document.querySelectorAll("[data-key]");
+      elements.forEach(el => {
+        const key = el.getAttribute("data-key");
+        if(translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      // active class
+      document.querySelectorAll(".lang-switcher button").forEach(btn => btn.classList.remove("active"));
+      document.querySelector(`.lang-switcher button[data-lang="${lang}"]`).classList.add("active");
+    }
+
+    // Default til yoki saqlangan til
+    const savedLang = localStorage.getItem("siteLang") || "uz";
+    applyLanguage(savedLang);
+
+    // Til tugmalari
+    document.querySelectorAll(".lang-switcher button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const lang = btn.getAttribute("data-lang");
+        localStorage.setItem("siteLang", lang);
+        applyLanguage(lang);
+      });
+    });
+  </script>
+
+</body>
+</html>
