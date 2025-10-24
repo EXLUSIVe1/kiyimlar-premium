@@ -9,7 +9,7 @@
 body {
   background-color: #ffffff;
   color: #111;
-  overflow-x: hidden;
+  overflow-x: auto; /* riluk qo'shildi */
 }
 
 /* ======== HEADER ======== */
@@ -24,8 +24,8 @@ header {
 }
 
 .container {
-  width: 90%;
-  max-width: 1200px;
+  width: 1200px; /* desktop kengligi */
+  max-width: 100%;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -186,62 +186,13 @@ footer {
   font-size: 0.9rem;
 }
 
-/* ======== RESPONSIVE DESIGN ======== */
-@media (max-width: 992px) {
-  .hero-content h2 {
-    font-size: 2.2rem;
-  }
-  .hero-content p {
-    font-size: 1rem;
+/* ======== RESPONSIVE DESIGN OVERRIDE ======== */
+@media (max-width: 1200px) {
+  .container {
+    width: 100%; /* desktop look saqlash */
   }
 }
 
-@media (max-width: 768px) {
-  .menu-icon {
-    display: block;
-  }
-
-  nav ul {
-    flex-direction: column;
-    background: #000;
-    position: absolute;
-    top: 70px;
-    right: 0;
-    width: 100%;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-  }
-
-  #menu-toggle:checked ~ nav ul {
-    max-height: 300px;
-    padding: 20px 0;
-  }
-
-  nav ul li {
-    padding: 10px 0;
-  }
-
-  .feature {
-    width: 80%;
-  }
-
-  .hero {
-    height: 70vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-content h2 {
-    font-size: 1.8rem;
-  }
-  .hero-content p {
-    font-size: 0.95rem;
-  }
-  .btn {
-    padding: 10px 22px;
-  }
-}
 /* ======== NAVIGATION BUTTON STYLE ======== */
 nav {
   display: flex;
@@ -272,14 +223,6 @@ nav button.active {
   color: #000;
 }
 
-@media (max-width: 768px) {
-  nav {
-    justify-content: center;
-  }
-  nav button {
-    width: 45%;
-  }
-}
 .lang-switcher {
   display: flex;
   gap: 8px;
@@ -297,22 +240,53 @@ nav button.active {
   transition: all 0.3s ease;
 }
 
-/* Hover effekti */
 .lang-switcher button:hover {
   background: gold;
   color: #111;
   transform: scale(1.05);
 }
 
-/* Aktiv (tanlangan) til */
 .lang-switcher button.active {
   background-color: gold;
   color: #111;
   box-shadow: 0 0 8px gold;
 }
 
-/* Kichik ekranlar (telefon) uchun */
+/* ======== SMALL SCREENS (MOBILE) OVERRIDE ======== */
 @media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  nav ul {
+    flex-direction: column;
+    background: #000;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  #menu-toggle:checked ~ nav ul {
+    max-height: 300px;
+    padding: 20px 0;
+  }
+
+  nav ul li {
+    padding: 10px 0;
+  }
+
+  .feature {
+    width: 300px; /* desktop width saqlash */
+  }
+
+  .hero {
+    height: 90vh; /* desktop look saqlash */
+  }
+
   .lang-switcher button {
     padding: 6px 10px;
     font-size: 14px;
