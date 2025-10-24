@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aloqa | Exclusive Premium House</title>
+  <title data-key="pageTitle">Aloqa | Exclusive Premium House</title>
   <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/png" href="image/premiumm.jpg" />
+  <link rel="icon" type="image/png" href="image/premiumm.jpg" />
 
   <style>
     body {
@@ -29,20 +29,20 @@
       padding: 0 20px;
     }
     header .logo span { color: gold; font-weight: bold; }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      margin: 0;
-      padding: 0;
-    }
-    nav ul li a {
+    nav button {
+      background: none;
+      border: none;
       color: #fff;
-      text-decoration: none;
       font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
       transition: 0.3s;
     }
-    nav ul li a.active, nav ul li a:hover { color: gold; }
+    nav button:hover, nav button.active {
+      background: gold;
+      color: #111;
+    }
     .lang-switcher button {
       margin-left: 10px;
       padding: 5px 10px;
@@ -52,6 +52,7 @@
       background: #222;
       color: #fff;
       transition: 0.3s;
+      font-weight: bold;
     }
     .lang-switcher button:hover { background: gold; color: #111; }
 
@@ -96,35 +97,116 @@
     <div class="container">
       <div class="logo">Exclusive <span>Premium House</span></div>
       <nav>
-        <ul>
-          <li><a href="index.html">Bosh sahifa</a></li>
-          <li><a href="products.html">Mahsulotlar</a></li>
-          <li><a href="about.html">Biz haqimizda</a></li>
-          <li><a href="contact.html" class="active">Aloqa</a></li>
-          <li><a href="admin.html">Admin</a></li>
-        </ul>
+        <button onclick="location.href='index.html'" data-key="home">Bosh sahifa</button>
+        <button onclick="location.href='products.html'" data-key="products">Mahsulotlar</button>
+        <button onclick="location.href='about.html'" data-key="about">Biz haqimizda</button>
+        <button onclick="location.href='contact.html'" class="active" data-key="contact">Aloqa</button>
+        <button onclick="location.href='admin.html'" data-key="admin">Admin</button>
       </nav>
       <div class="lang-switcher">
-        <button>UZ</button>
-        <button>RU</button>
-        <button>EN</button>
+        <button data-lang="uz">UZ</button>
+        <button data-lang="ru">RU</button>
+        <button data-lang="en">EN</button>
       </div>
     </div>
   </header>
 
   <!-- CONTACT SECTION -->
   <section id="contactInfo">
-    <h2 style="color:#111; margin-bottom:30px;">Biz bilan bog‘lanish</h2>
-    <p>📍 <strong>Manzil:</strong> <a href="https://maps.app.goo.gl/mgmDmKa1dDcqkQnc9" target="_blank">Google Map orqali ko‘ring</a></p>
-    <p>📞 <strong>Telefon:</strong> <a href="tel:+998919871717">+998 91 987 17 17</a></p>
-    <p>📸 <strong>Instagram:</strong> <a href="https://www.instagram.com/exclusive_premium_house_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">@exclusive_premium_house_</a></p>
-    <p>✉ <strong>Telegram:</strong> <a href="https://t.me/exclusive_premium_house" target="_blank">@exclusive_premium_house</a></p>
+    <h2 data-key="contactTitle" style="color:#111; margin-bottom:30px;">Biz bilan bog‘lanish</h2>
+    <p>📍 <strong data-key="address">Manzil:</strong> 
+      <a href="https://maps.app.goo.gl/mgmDmKa1dDcqkQnc9" target="_blank" data-key="map">Google Map orqali ko‘ring</a>
+    </p>
+    <p>📞 <strong data-key="phone">Telefon:</strong> 
+      <a href="tel:+998919871717">+998 91 987 17 17</a>
+    </p>
+    <p>📸 <strong data-key="instagram">Instagram:</strong> 
+      <a href="https://www.instagram.com/exclusive_premium_house_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">@exclusive_premium_house_</a>
+    </p>
+    <p>✉ <strong data-key="telegram">Telegram:</strong> 
+      <a href="https://t.me/exclusive_premium_house" target="_blank">@exclusive_premium_house</a>
+    </p>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan.</p>
+    <p data-key="rights">© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan.</p>
   </footer>
+
+  <!-- MULTILANGUAGE SCRIPT -->
+  <script>
+    const translations = {
+      uz: {
+        pageTitle: "Aloqa | Exclusive Premium House",
+        home: "Bosh sahifa",
+        products: "Mahsulotlar",
+        about: "Biz haqimizda",
+        contact: "Aloqa",
+        admin: "Admin",
+        contactTitle: "Biz bilan bog‘lanish",
+        address: "Manzil:",
+        map: "Google Map orqali ko‘ring",
+        phone: "Telefon:",
+        instagram: "Instagram:",
+        telegram: "Telegram:",
+        rights: "© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan."
+      },
+      ru: {
+        pageTitle: "Контакты | Exclusive Premium House",
+        home: "Главная",
+        products: "Товары",
+        about: "О нас",
+        contact: "Контакты",
+        admin: "Админ",
+        contactTitle: "Свяжитесь с нами",
+        address: "Адрес:",
+        map: "Посмотреть на Google Картах",
+        phone: "Телефон:",
+        instagram: "Инстаграм:",
+        telegram: "Телеграм:",
+        rights: "© 2025 Exclusive Premium House | Все права защищены."
+      },
+      en: {
+        pageTitle: "Contact | Exclusive Premium House",
+        home: "Home",
+        products: "Products",
+        about: "About",
+        contact: "Contact",
+        admin: "Admin",
+        contactTitle: "Get in Touch",
+        address: "Address:",
+        map: "View on Google Maps",
+        phone: "Phone:",
+        instagram: "Instagram:",
+        telegram: "Telegram:",
+        rights: "© 2025 Exclusive Premium House | All rights reserved."
+      }
+    };
+
+    const buttons = document.querySelectorAll(".lang-switcher button");
+    const elements = document.querySelectorAll("[data-key]");
+    const currentLang = localStorage.getItem("lang") || "uz";
+    setLanguage(currentLang);
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const lang = btn.dataset.lang;
+        setLanguage(lang);
+      });
+    });
+
+    function setLanguage(lang) {
+      localStorage.setItem("lang", lang);
+      elements.forEach(el => {
+        const key = el.getAttribute("data-key");
+        if (translations[lang][key]) {
+          el.textContent = translations[lang][key];
+          if (key === "pageTitle") document.title = translations[lang][key];
+        }
+      });
+      document.documentElement.lang = lang;
+    }
+  </script>
 
 </body>
 </html>

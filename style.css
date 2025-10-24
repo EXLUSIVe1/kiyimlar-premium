@@ -16,8 +16,11 @@ body {
 header {
   background-color: #000;
   color: #fff;
-  padding: 20px 0;
+  padding: 15px 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .container {
@@ -27,6 +30,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -53,29 +57,37 @@ nav ul li a {
   transition: color 0.3s ease;
 }
 
-nav ul li a:hover {
+nav ul li a:hover,
+nav ul li a.active {
   color: #d4af37;
 }
 
-/* ======== LANGUAGE SWITCHER ======== */
-.lang-switcher {
-  display: flex;
-  gap: 10px;
-}
-
-.lang-switcher button {
+/* ======== NAV BUTTONS ======== */
+.nav-btn {
   background: transparent;
-  border: 1px solid #d4af37;
-  color: #d4af37;
-  padding: 5px 10px;
+  padding: 8px 16px;
+  border: 1px solid transparent;
   border-radius: 20px;
-  cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.lang-switcher button:hover {
-  background: #d4af37;
-  color: #000;
+.nav-btn:hover,
+.nav-btn.active {
+  border-color: #d4af37;
+  color: #d4af37;
+  background: rgba(212, 175, 55, 0.1);
+}
+
+/* ======== MENU ICON (MOBILE) ======== */
+.menu-icon {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #d4af37;
+}
+
+#menu-toggle {
+  display: none;
 }
 
 /* ======== HERO SECTION ======== */
@@ -101,22 +113,23 @@ nav ul li a:hover {
   position: relative;
   z-index: 2;
   max-width: 700px;
+  padding: 0 15px;
 }
 
 .hero-content h2 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   margin-bottom: 15px;
   color: #d4af37;
 }
 
 .hero-content p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin-bottom: 25px;
 }
 
 .btn {
   display: inline-block;
-  padding: 10px 25px;
+  padding: 12px 28px;
   background-color: #d4af37;
   color: #000;
   text-decoration: none;
@@ -138,7 +151,7 @@ nav ul li a:hover {
 
 .features .container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 30px;
 }
@@ -174,22 +187,134 @@ footer {
 }
 
 /* ======== RESPONSIVE DESIGN ======== */
+@media (max-width: 992px) {
+  .hero-content h2 {
+    font-size: 2.2rem;
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
+  .menu-icon {
+    display: block;
   }
 
   nav ul {
     flex-direction: column;
-    gap: 10px;
+    background: #000;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
   }
 
-  .hero-content h2 {
-    font-size: 2rem;
+  #menu-toggle:checked ~ nav ul {
+    max-height: 300px;
+    padding: 20px 0;
+  }
+
+  nav ul li {
+    padding: 10px 0;
   }
 
   .feature {
     width: 80%;
+  }
+
+  .hero {
+    height: 70vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h2 {
+    font-size: 1.8rem;
+  }
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+  .btn {
+    padding: 10px 22px;
+  }
+}
+/* ======== NAVIGATION BUTTON STYLE ======== */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+nav button {
+  background-color: transparent;
+  border: 2px solid #d4af37;
+  color: #d4af37;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+nav button:hover {
+  background-color: #d4af37;
+  color: #000;
+  transform: scale(1.05);
+}
+
+nav button.active {
+  background-color: #d4af37;
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  nav {
+    justify-content: center;
+  }
+  nav button {
+    width: 45%;
+  }
+}
+.lang-switcher {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.lang-switcher button {
+  background: transparent;
+  color: white;
+  border: 2px solid gold;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effekti */
+.lang-switcher button:hover {
+  background: gold;
+  color: #111;
+  transform: scale(1.05);
+}
+
+/* Aktiv (tanlangan) til */
+.lang-switcher button.active {
+  background-color: gold;
+  color: #111;
+  box-shadow: 0 0 8px gold;
+}
+
+/* Kichik ekranlar (telefon) uchun */
+@media (max-width: 768px) {
+  .lang-switcher button {
+    padding: 6px 10px;
+    font-size: 14px;
   }
 }

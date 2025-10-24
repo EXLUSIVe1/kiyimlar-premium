@@ -4,9 +4,127 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Biz haqimizda | Exclusive Premium House</title>
+  <link rel="icon" type="image/png" href="image/premiumm.jpg" />
   <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/png" href="image/premiumm.jpg" />
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      color: #222;
+    }
+    header {
+      background: #111;
+      color: #fff;
+      padding: 15px 0;
+    }
+    .container {
+      width: 90%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .logo span {
+      color: gold;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+    nav ul li a.active,
+    nav ul li a:hover {
+      background: gold;
+      color: #111;
+      border-color: gold;
+      transform: scale(1.05);
+    }
+
+    .lang-switcher {
+      display: flex;
+      gap: 6px;
+    }
+    .lang-switcher button {
+      padding: 8px 14px;
+      border: 2px solid gold;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      background: transparent;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    .lang-switcher button:hover,
+    .lang-switcher button.active {
+      background: gold;
+      color: #111;
+      transform: scale(1.05);
+    }
+
+    /* ABOUT SECTION */
+    .about-section {
+      background: #fff;
+      padding: 60px 0;
+      text-align: center;
+    }
+    .about-section .container {
+      flex-direction: column;
+      max-width: 800px;
+    }
+    .about-section h2 {
+      color: #000;
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+    .about-section p {
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    .about-image {
+      width: 100%;
+      max-width: 700px;
+      margin-top: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .about-section h2 {
+        font-size: 26px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -16,42 +134,107 @@
       <div class="logo">Exclusive <span>Premium House</span></div>
       <nav>
         <ul>
-          <li><a href="index.html">Bosh sahifa</a></li>
-          <li><a href="products.html">Mahsulotlar</a></li>
-          <li><a href="about.html" class="active">Biz haqimizda</a></li>
-          <li><a href="contact.html">Aloqa</a></li>
-                              <li><a href="admin.html">Admin</a></li>
-
+          <li><a href="index.html" data-key="home">Bosh sahifa</a></li>
+          <li><a href="products.html" data-key="products">Mahsulotlar</a></li>
+          <li><a href="about.html" class="active" data-key="about">Biz haqimizda</a></li>
+          <li><a href="contact.html" data-key="contact">Aloqa</a></li>
+          <li><a href="admin.html" data-key="admin">Admin</a></li>
         </ul>
       </nav>
       <div class="lang-switcher">
-        <button>UZ</button>
-        <button>RU</button>
-        <button>EN</button>
+        <button data-lang="uz" class="active">UZ</button>
+        <button data-lang="ru">RU</button>
+        <button data-lang="en">EN</button>
       </div>
     </div>
   </header>
 
   <!-- ABOUT SECTION -->
-  <section class="features" style="text-align:center;">
-    <h2 style="color:#000; margin-bottom:30px;">Biz haqimizda</h2>
-    <div class="container" style="flex-direction:column; max-width:800px;">
-      <p>
+  <section class="about-section">
+    <div class="container">
+      <h2 data-key="aboutTitle">Biz haqimizda</h2>
+      <p data-key="aboutText1">
         <strong>Exclusive Premium House</strong> — bu erkaklar uchun yaratilgan premium kiyimlar do‘koni.
         Bizning maqsadimiz — har bir mijozga o‘ziga xos uslub, sifat va qulaylikni taqdim etish.
       </p>
-      <br>
-      <p>
+      <p data-key="aboutText2">
         Kiyimlarimiz Italiya va Turkiyadagi ishonchli ishlab chiqaruvchilardan olib kelingan bo‘lib,
         har bir detalga e’tibor bilan tayyorlangan. Siz bizda o‘zingizga mos klassik va zamonaviy uslubni topasiz.
       </p>
+      <p data-key="aboutText3">
+        Biz uchun eng muhimi — sizning ishonchingiz. Shuning uchun sifat, xizmat va dizaynda doimo mukammallikka intilamiz.
+      </p>
+      <img src="image/premium.jpg" alt="Exclusive Premium House" class="about-image" />
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan.</p>
+    <p data-key="footer">© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan.</p>
   </footer>
 
+  <!-- JAVASCRIPT -->
+  <script>
+    const translations = {
+      uz: {
+        home: "Bosh sahifa",
+        products: "Mahsulotlar",
+        about: "Biz haqimizda",
+        contact: "Aloqa",
+        admin: "Admin",
+        aboutTitle: "Biz haqimizda",
+        aboutText1: "Exclusive Premium House — bu erkaklar uchun yaratilgan premium kiyimlar do‘koni. Bizning maqsadimiz — har bir mijozga o‘ziga xos uslub, sifat va qulaylikni taqdim etish.",
+        aboutText2: "Kiyimlarimiz Italiya va Turkiyadagi ishonchli ishlab chiqaruvchilardan olib kelingan bo‘lib, har bir detalga e’tibor bilan tayyorlangan. Siz bizda o‘zingizga mos klassik va zamonaviy uslubni topasiz.",
+        aboutText3: "Biz uchun eng muhimi — sizning ishonchingiz. Shuning uchun sifat, xizmat va dizaynda doimo mukammallikka intilamiz.",
+        footer: "© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan."
+      },
+      ru: {
+        home: "Главная",
+        products: "Продукты",
+        about: "О нас",
+        contact: "Контакты",
+        admin: "Админ",
+        aboutTitle: "О нас",
+        aboutText1: "Exclusive Premium House — это магазин премиальной одежды для мужчин. Наша цель — предложить каждому клиенту уникальный стиль, качество и комфорт.",
+        aboutText2: "Наша одежда производится из Италии и Турции у проверенных производителей, с вниманием к каждой детали. У нас вы найдете как классический, так и современный стиль.",
+        aboutText3: "Для нас самое важное — ваше доверие. Поэтому мы стремимся к совершенству в качестве, обслуживании и дизайне.",
+        footer: "© 2025 Exclusive Premium House | Все права защищены."
+      },
+      en: {
+        home: "Home",
+        products: "Products",
+        about: "About Us",
+        contact: "Contact",
+        admin: "Admin",
+        aboutTitle: "About Us",
+        aboutText1: "Exclusive Premium House is a premium clothing store for men. Our goal is to offer every customer unique style, quality, and comfort.",
+        aboutText2: "Our clothes are sourced from trusted manufacturers in Italy and Turkey, crafted with attention to every detail. You'll find both classic and modern styles here.",
+        aboutText3: "For us, the most important thing is your trust. That’s why we strive for perfection in quality, service, and design.",
+        footer: "© 2025 Exclusive Premium House | All rights reserved."
+      }
+    };
+
+    function applyLanguage(lang) {
+      document.querySelectorAll("[data-key]").forEach(el => {
+        const key = el.getAttribute("data-key");
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      document.querySelectorAll(".lang-switcher button").forEach(btn => btn.classList.remove("active"));
+      document.querySelector(`.lang-switcher button[data-lang="${lang}"]`).classList.add("active");
+    }
+
+    const savedLang = localStorage.getItem("siteLang") || "uz";
+    applyLanguage(savedLang);
+
+    document.querySelectorAll(".lang-switcher button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const lang = btn.getAttribute("data-lang");
+        localStorage.setItem("siteLang", lang);
+        applyLanguage(lang);
+      });
+    });
+  </script>
 </body>
 </html>

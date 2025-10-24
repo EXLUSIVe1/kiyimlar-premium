@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mahsulotlar | Exclusive Premium House</title>
+  <title data-key="pageTitle">Mahsulotlar | Exclusive Premium House</title>
   <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/png" href="image/premiumm.jpg" />
+  <link rel="icon" type="image/png" href="image/premiumm.jpg" />
 
   <style>
     body {
@@ -35,22 +35,18 @@
     .logo span {
       color: gold;
     }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 15px;
-      padding: 0;
-      margin: 0;
-    }
-    nav ul li a {
-      text-decoration: none;
+    nav button {
+      background: none;
+      border: none;
       color: #fff;
       padding: 8px 12px;
+      cursor: pointer;
       border-radius: 5px;
       transition: 0.3s;
+      font-weight: bold;
     }
-    nav ul li a.active,
-    nav ul li a:hover {
+    nav button:hover,
+    nav button.active {
       background: gold;
       color: #111;
     }
@@ -142,35 +138,105 @@
     <div class="container">
       <div class="logo">Exclusive <span>Premium House</span></div>
       <nav>
-        <ul>
-          <li><a href="index.html">Bosh sahifa</a></li>
-          <li><a href="products.html" class="active">Mahsulotlar</a></li>
-          <li><a href="about.html">Biz haqimizda</a></li>
-          <li><a href="contact.html">Aloqa</a></li>
-          <li><a href="car.html">Savatcha</a></li>
-          <li><a href="admin.html">Admin</a></li>
-        </ul>
+        <button onclick="location.href='index.html'" data-key="home">Bosh sahifa</button>
+        <button onclick="location.href='products.html'" class="active" data-key="products">Mahsulotlar</button>
+        <button onclick="location.href='about.html'" data-key="about">Biz haqimizda</button>
+        <button onclick="location.href='contact.html'" data-key="contact">Aloqa</button>
+        <button onclick="location.href='admin.html'" data-key="admin">Admin</button>
       </nav>
       <div class="lang-switcher">
-        <button>UZ</button>
-        <button>RU</button>
-        <button>EN</button>
+        <button data-lang="uz">UZ</button>
+        <button data-lang="ru">RU</button>
+        <button data-lang="en">EN</button>
       </div>
     </div>
   </header>
 
   <!-- PRODUCTS SECTION -->
   <section class="features" id="products">
-    <h2>Bizning Mahsulotlar</h2>
+    <h2 data-key="ourProducts">Bizning Mahsulotlar</h2>
     <div class="products-container" id="productList">
-      <p style="text-align:center; color:#555;">Mahsulotlar yuklanmoqda...</p>
+      <p style="text-align:center; color:#555;" data-key="loading">Mahsulotlar yuklanmoqda...</p>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan.</p>
+    <p data-key="rights">© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan.</p>
   </footer>
+
+  <!-- MULTILANGUAGE SCRIPT -->
+  <script>
+    const translations = {
+      uz: {
+        home: "Bosh sahifa",
+        products: "Mahsulotlar",
+        about: "Biz haqimizda",
+        contact: "Aloqa",
+        admin: "Admin",
+        ourProducts: "Bizning Mahsulotlar",
+        loading: "Mahsulotlar yuklanmoqda...",
+        noProducts: "Hozircha mahsulotlar yo‘q.",
+        addToCart: "Savatga qo‘shish",
+        descEmpty: "Tavsif mavjud emas",
+        added: "savatga qo‘shildi!",
+        rights: "© 2025 Exclusive Premium House | Barcha huquqlar himoyalangan."
+      },
+      ru: {
+        home: "Главная",
+        products: "Товары",
+        about: "О нас",
+        contact: "Контакты",
+        admin: "Админ",
+        ourProducts: "Наши товары",
+        loading: "Загрузка товаров...",
+        noProducts: "Пока нет товаров.",
+        addToCart: "Добавить в корзину",
+        descEmpty: "Описание отсутствует",
+        added: "добавлен в корзину!",
+        rights: "© 2025 Exclusive Premium House | Все права защищены."
+      },
+      en: {
+        home: "Home",
+        products: "Products",
+        about: "About",
+        contact: "Contact",
+        admin: "Admin",
+        ourProducts: "Our Products",
+        loading: "Loading products...",
+        noProducts: "No products available yet.",
+        addToCart: "Add to cart",
+        descEmpty: "No description available",
+        added: "added to cart!",
+        rights: "© 2025 Exclusive Premium House | All rights reserved."
+      }
+    };
+
+    const buttons = document.querySelectorAll(".lang-switcher button");
+    const elements = document.querySelectorAll("[data-key]");
+
+    // Tanlangan tilni o‘qish
+    const currentLang = localStorage.getItem("lang") || "uz";
+    setLanguage(currentLang);
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const lang = btn.dataset.lang;
+        setLanguage(lang);
+      });
+    });
+
+    function setLanguage(lang) {
+      localStorage.setItem("lang", lang);
+      elements.forEach(el => {
+        const key = el.getAttribute("data-key");
+        if (translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      document.documentElement.lang = lang;
+    }
+  </script>
 
   <!-- FIREBASE -->
   <script type="module">
@@ -191,6 +257,12 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     const productList = document.getElementById("productList");
+    const translations = {
+      uz: { descEmpty: "Tavsif mavjud emas", addToCart: "Savatga qo‘shish", noProducts: "Hozircha mahsulotlar yo‘q.", added: "savatga qo‘shildi!" },
+      ru: { descEmpty: "Описание отсутствует", addToCart: "Добавить в корзину", noProducts: "Пока нет товаров.", added: "добавлен в корзину!" },
+      en: { descEmpty: "No description available", addToCart: "Add to cart", noProducts: "No products available yet.", added: "added to cart!" }
+    };
+    const lang = localStorage.getItem("lang") || "uz";
 
     const productsRef = ref(db, "products");
     onValue(productsRef, (snapshot) => {
@@ -203,14 +275,16 @@
           card.innerHTML = `
             <img src="${p.image}" alt="${p.name}">
             <h3>${p.name}</h3>
-            <p>${p.desc || "Tavsif mavjud emas"}</p>
+            <p>${p.desc || translations[lang].descEmpty}</p>
             <p><strong>${Number(p.price).toLocaleString()} so‘m</strong></p>
-            <button class="add-to-cart" data-name="${p.name}" data-price="${p.price}">Savatga qo‘shish</button>
+            <button class="add-to-cart" data-name="${p.name}" data-price="${p.price}">
+              ${translations[lang].addToCart}
+            </button>
           `;
           productList.appendChild(card);
         });
       } else {
-        productList.innerHTML = "<p style='text-align:center;'>Hozircha mahsulotlar yo‘q.</p>";
+        productList.innerHTML = `<p style='text-align:center;'>${translations[lang].noProducts}</p>`;
       }
     });
 
@@ -222,10 +296,9 @@
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
         cart.push({ name, price });
         localStorage.setItem("cart", JSON.stringify(cart));
-        alert(`✅ "${name}" savatga qo‘shildi!`);
+        alert(`✅ "${name}" ${translations[lang].added}`);
       }
     });
   </script>
-
 </body>
 </html>
