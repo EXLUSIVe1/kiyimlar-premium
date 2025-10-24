@@ -292,3 +292,135 @@ nav button.active {
     font-size: 14px;
   }
 }
+/* 1. Umumiy reset — sahifani toza ko‘rsatadi */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Body — orqa fon va skrollni to‘g‘rilash */
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* yon oq joy chiqmasligi uchun */
+  font-family: "Poppins", sans-serif;
+  background-color: #f5f5f5; /* orqa fon */
+}
+
+/* 3. Header (menyu) elementlarini markazda ushlab turish */
+header {
+  width: 100%;
+  background-color: #000; /* qora fon */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+/* 4. Tugmalar */
+button, .btn {
+  background-color: #ffcc00;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover, .btn:hover {
+  background-color: #e6b800;
+}
+
+/* 5. Hero bo‘lim (asosiy banner) */
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #999; /* kulrang fon */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* 6. Sektsiyalar orasida masofa */
+section {
+  padding: 60px 20px;
+}
+
+/* 7. Kartochkalar */
+.card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* 8. Mobil versiya (max-width: 768px) */
+@media (max-width: 768px) {
+
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 60px 15px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  button, .btn {
+    width: 80%;
+    font-size: 16px;
+  }
+
+  .card {
+    margin: 15px auto;
+    width: 90%;
+  }
+}
+
+/* 9. Juda kichik ekranlar uchun (max-width: 480px) */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  button, .btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
